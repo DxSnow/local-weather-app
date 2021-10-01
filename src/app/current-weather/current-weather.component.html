@@ -1,1 +1,17 @@
-<p>current-weather works!</p>
+<div>
+  {{icw.city}}, {{icw.country}}
+</div>
+
+<div>
+  {{icw.date | date:'medium'}}  <!-- angular datepipe -->
+
+</div>
+
+<div>
+  <img [src] = 'icw.image'/>
+  {{icw.temperature | number:"1.0-0"}} 	&#8457;
+</div>
+
+<div>
+  {{icw.description}}
+</div>
