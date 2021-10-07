@@ -15,7 +15,7 @@ export class WeatherService {
   }
 // do not write below function in constructor because you only want it to run when it is called. Not as soon as it is constructed.
   getCurrentWeather(city: string, country: string){
-    this.http.get<IcwFilter>(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.openweatherID}`).pipe(map(data => this.transformToIcurrentWeather(data)))
+    return this.http.get<IcwFilter>(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.openweatherID}`).pipe(map(data => this.transformToIcurrentWeather(data)))
 
 
   }
