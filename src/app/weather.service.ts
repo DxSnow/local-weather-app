@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IcwFilter } from './icw-filter';
 import { environment } from 'src/environments/environment';
 import { ICurrentWeather } from './icurrent-weather';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class WeatherService {
   }
 // do not write below function in constructor because you only want it to run when it is called. Not as soon as it is constructed.
   getCurrentWeather(city: string, country: string){
-    return this.http.get<IcwFilter>(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.openweatherID}`)
+    this.http.get<IcwFilter>(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.openweatherID}`).pipe(map(data => this.transformToIcurrentWeather(data)))
+
 
   }
   private transformToIcurrentWeather(filtered:IcwFilter):ICurrentWeather{
