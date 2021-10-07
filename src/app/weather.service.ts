@@ -17,6 +17,17 @@ export class WeatherService {
     return this.http.get<IcwFilter>(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.openweatherID}`)
 
   }
+  private transformToIcurrentWeather(filtered:IcwFilter):ICurrentWeather{
+    return{
+      city:filtered.name,
+      country:filtered.sys.country,
+      date:new Date(filtered.dt * 1000),
+      temperature: filtered.main.temp *9/5 - 459.67,
+      description:filtered.weather[0].description,
+      image:`http://openweathermap.org/img/w/${filtered.weather[0].icon}.png`
+    }
+
+  }
 
 
 
